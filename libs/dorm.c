@@ -1,42 +1,42 @@
-#include "dorm.h" 
+#include "dorm.h"
 #include <stdio.h>
 #include <string.h>
 
-void create_dorm(struct dorm_t *_dorm, char *_goar, unsigned short _boai, enum gender_t _gender)
+struct dorm_t create_dorm(char *_name, unsigned short _capacity, enum gender_t _gender)
 {
-    strcpy(_dorm-> goar, _goar);
-    _dorm->boai = _boai;
-    _dorm->gender= _gender;
-    _dorm->pigajolma = 0;
-} 
+    struct dorm_t d;
+    strcpy(d.name, _name);
+    d.capacity = _capacity;
+    d.gender = _gender;
+    d.residents_num = 0;
+    return d;
+}
 
-void print_dorm(struct dorm_t *_dorm, int jumlah)
+void print_dorm(struct dorm_t *_dorm, int count)
 {
-  for (int j = 0 ; j < jumlah; j++)
-  {
-    if (_dorm [j].gender == GENDER_MALE)
+    for (int i = 0; i < count; i++)
     {
-    printf ("%s|%d|, male\n", _dorm[j]. goar, _dorm[j].boai);
+        if (_dorm[i].gender == GENDER_MALE)
+        {
+            printf("%s|%d|male\n", _dorm[i].name, _dorm[i].capacity);
+        }
+        else if (_dorm[i].gender == GENDER_FEMALE)
+        {
+            printf("%s|%d|female\n", _dorm[i].name, _dorm[i].capacity);
+        }
     }
-    else if (_dorm [j].gender == GENDER_FEMALE)
-    {  
-    printf ("%s|%d|, female\n", _dorm[j]. goar, _dorm[j].boai);
-    }
-  }
 }
-
-void print_dorm_detail(struct dorm_t *_dorm, int jumlah)
+void print_dorm_detail(struct dorm_t *_dorm, int count)
 {
-        for (int c = 0 ; c < jumlah; c++)
-     {
-        if (_dorm [c].gender == GENDER_MALE)
+    for (int i = 0; i < count; i++)
+    {
+        if (_dorm[i].gender == GENDER_MALE)
         {
-       printf("%s|%d|male|%d\n", _dorm[c]. goar, _dorm[c].boai, _dorm[c]. pigajolma);
+            printf("%s|%d|male|%d\n", _dorm[i].name, _dorm[i].capacity, _dorm[i].residents_num);
         }
-        else if (_dorm[c]. gender == GENDER_FEMALE )
+        else if (_dorm[i].gender == GENDER_FEMALE)
         {
-       printf("%s|%d|female|%d\n", _dorm[c]. goar, _dorm[c].boai, _dorm[c]. pigajolma);
+            printf("%s|%d|female|%d\n", _dorm[i].name, _dorm[i].capacity, _dorm[i].residents_num);
         }
     }
 }
-
