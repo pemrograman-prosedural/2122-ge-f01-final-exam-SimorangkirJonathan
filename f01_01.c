@@ -144,4 +144,3 @@ int main(int _argc, char **_argv)
     free(dorms);
     return 0;
 }
-dd

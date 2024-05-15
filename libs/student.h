@@ -13,7 +13,7 @@ struct student_t
     char dorm[20];
 };
 
-void create_student(struct student_t *_student, char *_nim, char *_irem, char *_tahun, enum gender_t _gender);
+void create_student(struct student_t *_student, char *_nim, char *_goar, char *_tahun, enum gender_t _gender);
 void print_student(struct student_t *_student, int jumlah);
 void print_student_detail(struct student_t *_student, int jumlah);
 void assign_student(struct student_t *_student, struct dorm_t *_dorm);

@@ -31,11 +31,11 @@ void print_dorm_detail(struct dorm_t *_dorm, int jumlah)
      {
         if (_dorm [c].gender == GENDER_MALE)
         {
-        printf ("%s|%d|, male\n", _dorm[c]. goar, _dorm[c].boai, _dorm[c]. pigajolma);
+        printf ("%s|%d|male\n", _dorm[c]. goar, _dorm[c].boai, _dorm[c]. pigajolma);
         }
         else if (_dorm[c]. gender == GENDER_FEMALE )
         {
-        printf ("%s|%d|, female\n", _dorm[c]. goar, _dorm[c].boai, _dorm[c]. pigajolma);
+        printf ("%s|%d|female\n", _dorm[c]. goar, _dorm[c].boai, _dorm[c]. pigajolma);
         }
     }
 }
