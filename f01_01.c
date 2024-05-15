@@ -1,27 +1,11 @@
 // 12S23030 - Simorangkir Jonathan
 // 12S23045 - Chintya ReginaUli Rajagukguk
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include "libs/dorm.h"
 #include "libs/student.h"
-
-int compare(char *str1, char *str2)
-{
-    if (strlen(str1) != strlen(str2))
-    {
-        return 0;
-    }
-    for (int i = 0; i < strlen(str1); i++)
-    {
-        if (str1[i] != str2[i])
-        {
-            return 0;
-        }
-    }
-    return 1;
-}
-
 int main(int _argc, char **_argv)
 {
     struct dorm_t *dorms = malloc(100 * sizeof(struct dorm_t));
@@ -55,15 +39,19 @@ int main(int _argc, char **_argv)
             input[++c] = '\0';
         }
         data = strtok(input, "#");
-        if (compare(data, "---"))
+        if (strcmp(data, "---") == 0)
         {
             break;
         }
-        else if (compare(data, "student-print-all-detail"))
+        else if (strcmp(data, "student-print-all") == 0)
+        {
+            print_student(students, std);
+        }
+        else if (strcmp(data, "student-print-all-detail") == 0)
         {
             print_student_detail(students, std);
         }
-        else if (compare(data, "student-add"))
+        else if (strcmp(data, "student-add") == 0)
         {
             data = strtok(NULL, "#");
             strcpy(id, data);
@@ -72,34 +60,38 @@ int main(int _argc, char **_argv)
             data = strtok(NULL, "#");
             strcpy(year, data);
             data = strtok(NULL, "#");
-            if (compare(data, "male"))
+            if (strcmp(data, "male") == 0)
             {
-                create_student(&students[std], id, student_name, year, GENDER_MALE);
+                students[std] = create_student(id, student_name, year, GENDER_MALE);
             }
-            else if (compare(data, "female"))
+            else if (strcmp(data, "female") == 0)
             {
-                create_student(&students[std], id, student_name, year, GENDER_FEMALE);
+                students[std] = create_student(id, student_name, year, GENDER_FEMALE);
             }
             std++;
         }
-        else if (compare(input, "dorm-add"))
+        else if (strcmp(data, "dorm-print-all-detail") == 0)
+        {
+            print_dorm(dorms, dr);
+        }
+        else if (strcmp(input, "dorm-add") == 0)
         {
             data = strtok(NULL, "#");
             strcpy(dorm_name, data);
             data = strtok(NULL, "#");
             capacity = atoi(data);
             data = strtok(NULL, "#");
-            if (compare(data, "male"))
+            if (strcmp(data, "male") == 0)
             {
-                create_dorm(&dorms[dr], dorm_name, capacity, GENDER_MALE);
+                dorms[dr] = create_dorm(dorm_name, capacity, GENDER_MALE);
             }
-            else if (compare(data, "female"))
+            else if (strcmp(data, "female") == 0)
             {
-                create_dorm(&dorms[dr], dorm_name, capacity, GENDER_FEMALE);
+                dorms[dr] = create_dorm(dorm_name, capacity, GENDER_FEMALE);
             }
             dr++;
         }
-        else if (compare(data, "assign-student"))
+        else if (strcmp(data, "assign-student") == 0)
         {
             data = strtok(NULL, "#");
             strcpy(id, data);
@@ -109,7 +101,7 @@ int main(int _argc, char **_argv)
             idx_d = 0;
             for (int i = 0; i < std; i++)
             {
-                if (compare(students[i].nim, id))
+                if (strcmp(students[i].id, id) == 0)
                 {
                     idx_s = i;
                     break;
@@ -117,7 +109,7 @@ int main(int _argc, char **_argv)
             }
             for (int i = 0; i < std; i++)
             {
-                if (compare(dorms[i].goar, dorm_name))
+                if (strcmp(dorms[i].name, dorm_name) == 0)
                 {
                     idx_d = i;
                     break;
@@ -126,17 +118,30 @@ int main(int _argc, char **_argv)
             assign_student(&students[idx_s], &dorms[idx_d]);
         }
 
-        else if (compare(data, "student-leave"))
+        else if (strcmp(data, "student-leave") == 0)
         {
             data = strtok(NULL, "#");
+            strcpy(id, data);
+            idx_s = 0;
+            idx_d = 0;
             for (int i = 0; i < std; i++)
             {
-                if (compare(students[i].nim, data))
+                if (strcmp(students[i].id, id) == 0)
                 {
-                    strcpy(students[i].dorm, "left");
+                    idx_s = i;
                     break;
                 }
             }
+            for (int i = 0; i < dr; i++)
+            {
+                if (strcmp(students[idx_s].dorm->name, dorms[i].name) == 0)
+                {
+                    idx_d = i;
+                    break;
+                }
+            }
+
+            leave_student(&students[idx_s], &dorms[idx_d]);
         }
     } while (1);
     free(students);
