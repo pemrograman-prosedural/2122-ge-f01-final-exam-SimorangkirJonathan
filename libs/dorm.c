@@ -1,53 +1,42 @@
+#include "dorm.h" 
 #include <stdio.h>
 #include <string.h>
-#include "dorm.h"
-#include "gender.h"
 
-struct dorm_t create_dorm(char *_name, unsigned short _capacity, enum gender_t _gender)
+void create_dorm(struct dorm_t *_dorm, char *_goar, unsigned short _boai, enum gender_t _gender)
 {
-    struct dorm_t dorm_;
-    strcpy (dorm_.name, _name);
-    dorm_.capacity = _capacity;
-    dorm_.gender = _gender;
-    dorm_.residents_num = 0;
-
-    return dorm_;
-}
+    strcpy(_dorm-> goar, _goar);
+    _dorm->boai = _boai;
+    _dorm->gender= _gender;
+    _dorm->pigajolma = 0;
+} 
 
 void print_dorm(struct dorm_t *_dorm, int jumlah)
 {
-    char dorm_gender[10] = "";
-
-    for(int x = 1; x < jumlah + 1; ++x)
+  for (int j = 0 ; j < jumlah; j++)
+  {
+    if (_dorm [j].gender == GENDER_MALE)
     {
-        if(_dorm[x].gender == 0)
-        {
-            strcpy(dorm_gender, "male");
-            printf("%s|%d|%s\n", _dorm[x].name, _dorm[x].capacity, dorm_gender);
-        }
-        else if(_dorm[x].gender == 1)
-        {
-            strcpy(dorm_gender, "female");
-            printf("%s|%d|%s\n", _dorm[x].name, _dorm[x].capacity, dorm_gender);
-        }
+    printf ("%s|%.d|, male\n", _dorm[j]. goar, _dorm[j].boai);
     }
+    else if (_dorm [j].gender == GENDER_FEMALE)
+    {  
+    printf ("%s|%d|, female\n", _dorm[j]. goar, _dorm[j].boai);
+    }
+  }
 }
 
 void print_dorm_detail(struct dorm_t *_dorm, int jumlah)
 {
-    char dorm_gender[10] = "";
-
-    for(int x = 1; x < jumlah + 1; ++x)
-    {
-        if(_dorm[x].gender == 0)
+        for (int c = 0 ; c < jumlah; c++)
+     {
+        if (_dorm [c].gender == GENDER_MALE)
         {
-            strcpy(dorm_gender, "male");
-            printf("%s|%d|%s|%d\n", _dorm[x].name, _dorm[x].capacity, dorm_gender, _dorm[x].residents_num);
+        printf ("%s|%.d|, male\n", _dorm[c]. goar, _dorm[c].boai, _dorm[c]. pigajolma);
         }
-        else if(_dorm[x].gender == 1)
+        else if (_dorm[c]. gender == GENDER_FEMALE )
         {
-            strcpy(dorm_gender, "female");
-            printf("%s|%d|%s|%d\n", _dorm[x].name, _dorm[x].capacity, dorm_gender, _dorm[x].residents_num);
+        printf ("%s|%d|, female\n", _dorm[c]. goar, _dorm[c].boai, _dorm[c]. pigajolma);
         }
     }
 }
+
