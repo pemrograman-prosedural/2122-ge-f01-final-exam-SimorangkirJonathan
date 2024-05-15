@@ -7,7 +7,7 @@
 struct student_t
 {
     char nim[12];
-    char irem[40];
+    char goar[40];
     char tahun[5];
     enum gender_t gender;
     char dorm[20];

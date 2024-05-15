@@ -1,6 +1,5 @@
 // 12S23030 - Simorangkir Jonathan
 // 12S23045 - Chintya ReginaUli Rajagukguk
-
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -28,11 +27,11 @@ int main(int _argc, char **_argv)
     struct dorm_t *dorms = malloc(100 * sizeof(struct dorm_t));
     struct student_t *students = malloc(100 * sizeof(struct student_t));
     char input[100];
-    char nim[12];
-    char student_goar[40];
-    char tahun[5];
-    char dorm_goar[40];
-    unsigned short boai;
+    char id[12];
+    char student_name[40];
+    char year[5];
+    char dorm_name[40];
+    unsigned short capacity;
     char *data;
     int idx_s, idx_d;
     int std = 0, dr = 0;
@@ -67,50 +66,50 @@ int main(int _argc, char **_argv)
         else if (compare(data, "student-add"))
         {
             data = strtok(NULL, "#");
-            strcpy(nim, data);
+            strcpy(id, data);
             data = strtok(NULL, "#");
-            strcpy(student_goar, data);
+            strcpy(student_name, data);
             data = strtok(NULL, "#");
-            strcpy(tahun, data);
+            strcpy(year, data);
             data = strtok(NULL, "#");
             if (compare(data, "male"))
             {
-                create_student(&students[std], nim, student_goar, tahun, GENDER_MALE);
+                create_student(&students[std], id, student_name, year, GENDER_MALE);
             }
             else if (compare(data, "female"))
             {
-                create_student(&students[std], nim, student_goar, tahun, GENDER_FEMALE);
+                create_student(&students[std], id, student_name, year, GENDER_FEMALE);
             }
             std++;
         }
         else if (compare(input, "dorm-add"))
         {
             data = strtok(NULL, "#");
-            strcpy(dorm_goar, data);
+            strcpy(dorm_name, data);
             data = strtok(NULL, "#");
-            boai = atoi(data);
+            capacity = atoi(data);
             data = strtok(NULL, "#");
             if (compare(data, "male"))
             {
-                create_dorm(&dorms[dr], dorm_goar, boai, GENDER_MALE);
+                create_dorm(&dorms[dr], dorm_name, capacity, GENDER_MALE);
             }
             else if (compare(data, "female"))
             {
-                create_dorm(&dorms[dr], dorm_goar, boai, GENDER_FEMALE);
+                create_dorm(&dorms[dr], dorm_name, capacity, GENDER_FEMALE);
             }
             dr++;
         }
         else if (compare(data, "assign-student"))
         {
             data = strtok(NULL, "#");
-            strcpy(nim, data);
+            strcpy(id, data);
             data = strtok(NULL, "#");
-            strcpy(dorm_goar, data);
+            strcpy(dorm_name, data);
             idx_s = 0;
             idx_d = 0;
             for (int i = 0; i < std; i++)
             {
-                if (compare(students[i].nim, nim))
+                if (compare(students[i].nim, id))
                 {
                     idx_s = i;
                     break;
@@ -118,7 +117,7 @@ int main(int _argc, char **_argv)
             }
             for (int i = 0; i < std; i++)
             {
-                if (compare(dorms[i].goar, dorm_goar))
+                if (compare(dorms[i].goar, dorm_name))
                 {
                     idx_d = i;
                     break;
